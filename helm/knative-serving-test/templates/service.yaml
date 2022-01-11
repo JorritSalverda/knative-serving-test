@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: {{ include "knative-serving-test.fullname" . }}
+spec:
+  template:
+    spec:
+    containers:
+      - image: docker.io/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+        {{- with .Values.env }}
+        env:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
