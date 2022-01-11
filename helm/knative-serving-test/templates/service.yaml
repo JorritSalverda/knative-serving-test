@@ -5,9 +5,9 @@ metadata:
 spec:
   template:
     spec:
-    containers:
-      - image: docker.io/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
-        {{- with .Values.env }}
-        env:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+      containers:
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
